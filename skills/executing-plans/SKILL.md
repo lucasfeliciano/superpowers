@@ -46,6 +46,17 @@ After all tasks complete and verified:
 
 **Ask for clarification rather than guessing.**
 
+## Socratic Decision Points
+
+When a blocker requires a direction decision from the user that **diverges from the original plan** or involves a **significant design/architecture choice** not covered in the brainstorming phase, follow the `socratic-facilitation` skill to guide the decision. Present options neutrally, probe the user's justification, and do not recommend.
+
+**This does NOT apply to:**
+- Small implementation decisions (naming, utility choice, error message wording)
+- Decisions that follow directly from the plan
+- Technical troubleshooting within the plan's scope
+
+**Only activate for:** decisions that would change the plan's direction or introduce architectural choices that weren't previously explored.
+
 ## When to Revisit Earlier Steps
 
 **Return to Review (Step 1) when:**
@@ -68,3 +79,4 @@ After all tasks complete and verified:
 - **superpowers:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
 - **superpowers:writing-plans** - Creates the plan this skill executes
 - **superpowers:finishing-a-development-branch** - Complete development after all tasks
+- **superpowers:socratic-facilitation** - Follow at decision points that diverge from the plan
