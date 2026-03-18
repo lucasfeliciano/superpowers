@@ -167,6 +167,20 @@ You MUST complete each phase before proceeding to the next.
    - Ask for help
    - Research more
 
+### When Debugging Challenges Design Assumptions
+
+If investigation reveals that the root cause is an **architectural or design assumption** from the original spec — not just a bug — follow the `socratic-facilitation` skill before proceeding. The user should reason through whether to:
+- Fix within the current architecture
+- Revisit the design decision
+- Accept the limitation and document it
+
+Present options neutrally. Do not recommend an approach.
+
+**This does NOT apply to:**
+- Normal hypothesis selection and testing
+- Standard bug investigation and fixing
+- Implementation-level debugging within the current architecture
+
 ### Phase 4: Implementation
 
 **Fix the root cause, not the symptom:**
@@ -286,6 +300,7 @@ These techniques are part of systematic debugging and available in this director
 **Related skills:**
 - **superpowers:test-driven-development** - For creating failing test case (Phase 4, Step 1)
 - **superpowers:verification-before-completion** - Verify fix worked before claiming success
+- **superpowers:socratic-facilitation** - Follow when debugging reveals design assumption challenges
 
 ## Real-World Impact
 
