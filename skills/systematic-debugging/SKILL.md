@@ -167,7 +167,7 @@ You MUST complete each phase before proceeding to the next.
    - Ask for help
    - Research more
 
-### When Debugging Challenges Design Assumptions
+#### When Debugging Challenges Design Assumptions
 
 If investigation reveals that the root cause is an **architectural or design assumption** from the original spec — not just a bug — follow the `socratic-facilitation` skill before proceeding. The user should reason through whether to:
 - Fix within the current architecture
