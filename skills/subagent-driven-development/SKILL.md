@@ -117,6 +117,17 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 
 **Never** ignore an escalation or force the same model to retry without changes. If the implementer said it's stuck, something needs to change.
 
+### Socratic Decision Points
+
+When resolving a BLOCKED or NEEDS_CONTEXT status requires a **user decision that diverges from the original plan** or involves a **significant design/architecture choice**, follow the `socratic-facilitation` skill. Present the options to the user neutrally, probe their justification, and do not recommend.
+
+**This does NOT apply to:**
+- Providing missing context that's straightforward (file paths, config values)
+- Small implementation decisions within the plan's scope
+- Re-dispatching with a more capable model (operational, not design)
+
+**Only activate for:** decisions that would change the plan's direction or introduce architectural choices that weren't previously explored.
+
 ## Prompt Templates
 
 - `./implementer-prompt.md` - Dispatch implementer subagent
@@ -269,6 +280,7 @@ Done!
 - **superpowers:writing-plans** - Creates the plan this skill executes
 - **superpowers:requesting-code-review** - Code review template for reviewer subagents
 - **superpowers:finishing-a-development-branch** - Complete development after all tasks
+- **superpowers:socratic-facilitation** - Follow at decision points that diverge from the plan
 
 **Subagents should use:**
 - **superpowers:test-driven-development** - Subagents follow TDD for each task
