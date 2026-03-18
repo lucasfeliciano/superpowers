@@ -24,12 +24,13 @@ You MUST create a task for each of these items and complete them in order:
 1. **Explore project context** — check files, docs, recent commits
 2. **Offer visual companion** (if topic will involve visual questions) — this is its own message, not combined with a clarifying question. See the Visual Companion section below.
 3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
-4. **Propose 2-3 approaches** — with trade-offs and your recommendation
+4. **Present 2-3 approaches** — with trade-offs for each. Follow the `socratic-facilitation` skill at this and all subsequent decision points.
 5. **Present design** — in sections scaled to their complexity, get user approval after each section
-6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
-7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch until approved (max 3 iterations, then surface to human)
-8. **User reviews written spec** — ask user to review the spec file before proceeding
-9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+6. **Generate design rationale** — invoke `design-rationale` skill to produce the ADR document from decision data captured during the Socratic exploration
+7. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
+8. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch until approved (max 3 iterations, then surface to human)
+9. **User reviews written spec** — ask user to review the spec file before proceeding
+10. **Transition to implementation** — invoke writing-plans skill to create implementation plan
 
 ## Process Flow
 
@@ -39,9 +40,10 @@ digraph brainstorming {
     "Visual questions ahead?" [shape=diamond];
     "Offer Visual Companion\n(own message, no other content)" [shape=box];
     "Ask clarifying questions" [shape=box];
-    "Propose 2-3 approaches" [shape=box];
+    "Present 2-3 approaches\n(socratic-facilitation active)" [shape=box];
     "Present design sections" [shape=box];
     "User approves design?" [shape=diamond];
+    "Generate design rationale\n(design-rationale skill)" [shape=box];
     "Write design doc" [shape=box];
     "Spec review loop" [shape=box];
     "Spec review passed?" [shape=diamond];
@@ -52,11 +54,12 @@ digraph brainstorming {
     "Visual questions ahead?" -> "Offer Visual Companion\n(own message, no other content)" [label="yes"];
     "Visual questions ahead?" -> "Ask clarifying questions" [label="no"];
     "Offer Visual Companion\n(own message, no other content)" -> "Ask clarifying questions";
-    "Ask clarifying questions" -> "Propose 2-3 approaches";
-    "Propose 2-3 approaches" -> "Present design sections";
+    "Ask clarifying questions" -> "Present 2-3 approaches\n(socratic-facilitation active)";
+    "Present 2-3 approaches\n(socratic-facilitation active)" -> "Present design sections";
     "Present design sections" -> "User approves design?";
     "User approves design?" -> "Present design sections" [label="no, revise"];
-    "User approves design?" -> "Write design doc" [label="yes"];
+    "User approves design?" -> "Generate design rationale\n(design-rationale skill)" [label="yes"];
+    "Generate design rationale\n(design-rationale skill)" -> "Write design doc";
     "Write design doc" -> "Spec review loop";
     "Spec review loop" -> "Spec review passed?";
     "Spec review passed?" -> "Spec review loop" [label="issues found,\nfix and re-dispatch"];
@@ -82,9 +85,9 @@ digraph brainstorming {
 
 **Exploring approaches:**
 
-- Propose 2-3 different approaches with trade-offs
-- Present options conversationally with your recommendation and reasoning
-- Lead with your recommended option and explain why
+- Present 2-3 different approaches with trade-offs
+- **Follow the `socratic-facilitation` skill at all decision points** — present options neutrally, probe the user's justification, hold firm until decisions are well-reasoned
+- Do not recommend, suggest, or lead with a preferred option
 
 **Presenting the design:**
 
@@ -114,6 +117,7 @@ digraph brainstorming {
 - Write the validated design (spec) to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
   - (User preferences for spec location override this default)
 - Use elements-of-style:writing-clearly-and-concisely skill if available
+- Before writing the spec, invoke the `design-rationale` skill to generate the ADR document from decision data captured during the Socratic exploration
 - Commit the design document to git
 
 **Spec Review Loop:**
@@ -140,7 +144,8 @@ Wait for the user's response. If they request changes, make them and re-run the 
 - **One question at a time** - Don't overwhelm with multiple questions
 - **Multiple choice preferred** - Easier to answer than open-ended when possible
 - **YAGNI ruthlessly** - Remove unnecessary features from all designs
-- **Explore alternatives** - Always propose 2-3 approaches before settling
+- **Explore alternatives** - Always present 2-3 approaches before settling
+- **No recommendations** - Follow the `socratic-facilitation` skill — present options neutrally, never recommend
 - **Incremental validation** - Present design, get approval before moving on
 - **Be flexible** - Go back and clarify when something doesn't make sense
 
